@@ -3,7 +3,7 @@ import axios from "../axios";
 
 import styled from "styled-components";
 const base_url = "https://image.tmdb.org/t/p/w342";
-function Row({ title, fetchUrl }) {
+const Row = ({ title, fetchUrl, isLarge }) => {
 	const [movies, setMovies] = useState([]);
 	useEffect(() => {
 		async function fetchData() {
@@ -15,23 +15,34 @@ function Row({ title, fetchUrl }) {
 	}, [fetchUrl]);
 	console.log(movies);
 	return (
-		<div className="row">
+		<StyledRow>
 			<h2>{title}</h2>
 			<RowPosters>
 				{movies.map((movie) => (
 					<img
+						className={`${isLarge && "large_img"}`}
 						key={movie.id}
-						src={`${base_url}${movie.poster_path}`}
+						src={`${base_url}${
+							isLarge ? movie.poster_path : movie.backdrop_path
+						}`}
 						alt={movie.title}
 					/>
 				))}
 			</RowPosters>
-		</div>
+		</StyledRow>
 	);
-}
+};
+
+const StyledRow = styled.div`
+	padding: 0.5rem 0;
+	h2 {
+		padding: 0.5rem 20px;
+		font-weight: bold;
+	}
+`;
 
 const RowPosters = styled.div`
-	padding: 1rem;
+	padding: 20px;
 	display: flex;
 	overflow-y: hidden;
 	overflow-x: scroll;
@@ -41,13 +52,20 @@ const RowPosters = styled.div`
 	img {
 		object-fit: contain;
 		width: 100%;
-		max-height: 150px;
+		max-height: 100px;
 		margin-right: 10px;
 		transition: opacity 300ms, transform 450ms;
 
 		&:hover {
-			transform: scale(1.1);
+			transform: scale(1.08);
 			opacity: 0.8;
+		}
+	}
+
+	img.large_img {
+		max-height: 250px;
+		&:hover {
+			transform: scale(1.1);
 		}
 	}
 `;

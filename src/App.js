@@ -1,11 +1,14 @@
 import Row from "./Components/Row";
 import requests from "./requests";
+import GlobalStyles from "./Components/GlobalStyles";
 function App() {
 	return (
 		<div className="App">
+			<GlobalStyles />
 			<Row
 				title="Netflix originals"
 				fetchUrl={requests.fetchNetflixOriginals}
+				isLarge
 			/>
 			<Row title="Trending Now" fetchUrl={requests.fetchTrending} />
 			<Row title="Top Rated" fetchUrl={requests.fetchTopRated} />

@@ -1,10 +1,12 @@
 import Row from "./Components/Row";
 import requests from "./requests";
 import GlobalStyles from "./Components/GlobalStyles";
+import Banner from "./Components/Banner";
 function App() {
 	return (
 		<div className="App">
 			<GlobalStyles />
+			<Banner />
 			<Row
 				title="Netflix originals"
 				fetchUrl={requests.fetchNetflixOriginals}

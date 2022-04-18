@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
+import { keyframes } from "styled-components";
 
 import styled from "styled-components";
+// import { keyframes } from "styled-components";
 const base_url = "https://image.tmdb.org/t/p/w342";
 const Row = ({ title, fetchUrl, isLarge }) => {
 	const [movies, setMovies] = useState([]);
@@ -13,7 +15,6 @@ const Row = ({ title, fetchUrl, isLarge }) => {
 		}
 		fetchData();
 	}, [fetchUrl]);
-	console.log(movies);
 	return (
 		<StyledRow>
 			<h2>{title}</h2>
@@ -38,10 +39,20 @@ const StyledRow = styled.div`
 	h2 {
 		padding: 0.5rem 20px;
 		font-weight: bold;
+		color: white;
 	}
 `;
+// const scaling = keyframes`
+// 	/* from {
+// 		transform: scale(1);
+// 	} */
 
+// 	to {
+// 		transform: scale(1.5);
+// 	}
+// `;
 const RowPosters = styled.div`
+	margin-left: 1rem;
 	padding: 20px;
 	display: flex;
 	overflow-y: hidden;
@@ -54,11 +65,11 @@ const RowPosters = styled.div`
 		width: 100%;
 		max-height: 100px;
 		margin-right: 10px;
-		transition: opacity 300ms, transform 450ms;
+		transition: opacity, transform 450ms ease-out;
 
 		&:hover {
-			transform: scale(1.08);
-			opacity: 0.8;
+			transform: scale(1.09);
+			opacity: 0.5;
 		}
 	}
 
@@ -69,4 +80,5 @@ const RowPosters = styled.div`
 		}
 	}
 `;
+
 export default Row;
